@@ -3,6 +3,7 @@ use yew_router::prelude::Link;
 use yewdux::prelude::use_store;
 
 use crate::app::Route;
+use crate::components::navbar::NAV_ITEMS_WEBSITE;
 use crate::State;
 
 #[function_component]
@@ -12,18 +13,28 @@ pub fn Navbar() -> Html {
     let toggle_theme =
         dispatch.reduce_mut_callback(|state| state.is_dark_theme = !state.is_dark_theme);
 
+    let nav_item: Vec<Html> = {
+        let mut v: Vec<Html> = Vec::with_capacity(NAV_ITEMS_WEBSITE.len());
+        for x in NAV_ITEMS_WEBSITE.into_iter() {
+            v.push(html! {
+                <Link<Route> to={Route::Login}>
+                    <a class="p-2 btn btn-ghost mx-2">{x[0]}</a>
+                </Link<Route>>
+            })
+        }
+        v
+    };
+
     html! {
         <div>
             <div class="navbar bg-base-100 border-1 border-gray-600">
                 <div class="navbar-start">
-                    <div class="dropdown">
-                        <label tabindex="0" class="btn btn-ghost btn-circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
-                        </label>
-                    </div>
+                    <Link<Route> to={Route::Home}><a class="btn btn-ghost normal-case text-xl">{"Inventree"}</a></Link<Route>>
                 </div>
                 <div class="navbar-center">
-                    <Link<Route> to={Route::Home} classes="btn btn-ghost normal-case text-xl">{"Inventree"}</Link<Route>>
+                    <div class="d-flex flex-row items-center">
+                        {nav_item}
+                    </div>
                 </div>
                 <div class="navbar-end">
                     <input type="checkbox" class="toggle" onchange={toggle_theme} />
