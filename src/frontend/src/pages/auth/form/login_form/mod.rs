@@ -3,9 +3,11 @@ mod input;
 
 use gloo_console::log;
 use yew::prelude::*;
+use yew_router::prelude::Link;
 
-use crate::pages::auth::form::login_form::{
-    button::FormButton, button::PayloadData, input::TextInput,
+use crate::{
+    app::Route,
+    pages::auth::form::login_form::{button::FormButton, button::PayloadData, input::TextInput},
 };
 
 #[derive(Properties, PartialEq, Clone)]
@@ -53,7 +55,7 @@ pub fn LoginForm(props: &Props) -> Html {
                     </label>
                     <TextInput placeholder={String::from("Password")} value={props.password.clone()} on_change={password_callback_data_received} />
                     <label class="label">
-                        <a href="#" class="label-text-alt link link-hover">{"Forgot password?"}</a>
+                        <Link<Route> to={Route::Signup}><a class="label-text-alt link link-hover">{"New User? Create Account"}</a></Link<Route>>
                     </label>
                     </div>
                     <div class="form-control mt-6">
