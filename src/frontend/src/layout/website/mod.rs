@@ -7,7 +7,7 @@ pub struct Props {
 }
 
 #[function_component]
-pub fn DashboardLayout(props: &Props) -> Html {
+pub fn WebsiteLayout(props: &Props) -> Html {
     html! {
         <div>
             <Navbar/>

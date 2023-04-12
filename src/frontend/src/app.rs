@@ -13,7 +13,7 @@ use crate::pages::{
 };
 
 #[derive(Clone, Routable, PartialEq)]
-enum Route {
+pub enum Route {
     #[at("/")]
     Home,
     #[at("/dashboard")]
