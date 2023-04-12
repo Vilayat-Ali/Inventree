@@ -1,0 +1,17 @@
+[workspace]
+members = [
+    # Backend server
+    "src/server",
+    # Database
+    "src/mongodb",
+    # Frontend (Web Assembly)
+    "src/frontend",
+    # Common interface
+    "src/common",
+
+    # Utils
+    # Auth (JWT Token)
+    "src/utils/auth",
+    # Security Audits
+    "src/utils/security"
+]

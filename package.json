@@ -1,0 +1,19 @@
+{
+  "name": "inventree",
+  "version": "1.0.0",
+  "description": "Full-Stack web application for inventory management, powered by Rust and Web Assembly, built with using rust programming language",
+  "main": "index.js",
+  "repository": "https://github.com/Vilayat-Ali/Inventree.git",
+  "author": "vilayat-ali <vilayatcodemysite@gmail.com>",
+  "license": "Apache 2.0 License",
+  "scripts": {
+    "dev:css": "yarn tailwindcss --watch -c ./tailwind.config.js -o ./src/frontend/css/style.css",
+    "dev:check": "cargo clippy",
+    "doc": "cargo doc --workspace --no-deps --target-dir ./docs",
+    "start": "yarn install && yarn tailwindcss -c ./tailwind.config.js -o ./src/frontend/css/style.css --minify"
+  },
+  "dependencies": {
+    "daisyui": "^2.51.5",
+    "tailwindcss": "^3.3.1"
+  }
+}
