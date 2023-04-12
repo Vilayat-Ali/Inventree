@@ -12,6 +12,9 @@ pub mod utils;
 // yewdux state
 use yewdux::prelude::*;
 
+/// importing the frontend envs
+pub use security::{import_envs, FrontendConfig};
+
 #[derive(Default, Clone, PartialEq, Eq, Store)]
 pub struct State {
     pub menu_state: bool,

@@ -25,5 +25,6 @@ wee_alloc = "0.4.2"
 
 # User crates
 common = { path = "../common" }
+security = { path = "../utils/security" }
 
 

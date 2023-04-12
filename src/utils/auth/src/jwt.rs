@@ -22,7 +22,6 @@ impl Claims {
 /// # Generating Access Token
 /// The function takes username and email and returns the token wrapped in Ok.
 /// The cryptographic algorithm used to hash the tokens is SHA-512 for optimal security.
-
 pub fn generate_token(
     username: String,
     email: String,
@@ -35,6 +34,7 @@ pub fn generate_token(
     Ok(token)
 }
 
+/// This function is used to verify a token passed into headers of the request by the client
 pub fn verify_token(access_token: String) -> Result<TokenData<Claims>, Error> {
     let validation_result = decode::<Claims>(
         &access_token,
