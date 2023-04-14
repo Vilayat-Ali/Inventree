@@ -15,11 +15,11 @@ pub fn Navbar() -> Html {
 
     let nav_item: Vec<Html> = {
         let mut v: Vec<Html> = Vec::with_capacity(NAV_ITEMS_WEBSITE.len());
-        for x in NAV_ITEMS_WEBSITE.into_iter() {
+        for menu_item in NAV_ITEMS_WEBSITE.into_iter() {
             v.push(html! {
-                <Link<Route> to={Route::Login}>
-                    <a class="p-2 btn btn-ghost mx-2">{x[0]}</a>
-                </Link<Route>>
+                <>
+                    <a href={menu_item[1]} class="p-2 btn btn-ghost mx-2">{menu_item[0]}</a>
+                </>
             })
         }
         v

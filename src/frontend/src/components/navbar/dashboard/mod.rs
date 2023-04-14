@@ -6,6 +6,10 @@ use yewdux::prelude::*;
 #[function_component]
 pub fn Navbar() -> Html {
     let (_state, dispatch) = use_store::<State>();
+
+    let toggle_theme =
+        dispatch.reduce_mut_callback(|state| state.is_dark_theme = !state.is_dark_theme);
+
     let onclick = dispatch.reduce_mut_callback(|state| state.menu_state = !state.menu_state);
 
     html! {
@@ -22,6 +26,7 @@ pub fn Navbar() -> Html {
                     <a class="btn btn-ghost normal-case text-xl">{"Inventree"}</a>
                 </div>
                 <div class="navbar-end">
+                <input type="checkbox" class="toggle" onchange={toggle_theme} />
                     <button class="btn btn-ghost btn-circle">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                     </button>
