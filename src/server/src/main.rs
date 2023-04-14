@@ -1,5 +1,5 @@
 #[macro_use]
-extern crate rocket;
+pub extern crate rocket;
 
 #[get("/")]
 fn index() -> &'static str {
