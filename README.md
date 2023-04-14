@@ -51,3 +51,8 @@ Yes, the system is designed with security in mind at every step. User authentica
 
 ### How can I get started with using the system?
 To get started, simply clone the repository and follow the instructions in the README.md file. The system requires Node.js, Rust, and MongoDB to run, so be sure to have those installed before you begin. Once you have the system up and running, you can start managing your inventory right away!
+
+## Future scope
+
+- Addition of sales-related predictions on dashboard, aided by ML algorithms, implemented from scratch using Rustlang & Mongodb.
+- Server-side rendering for web assembly frontend.
