@@ -1,5 +1,7 @@
 # Inventree
 
+![Inventree Logo](./src/frontend/assets/img/home-hero-img.jpg)
+
 <p align="center" margin="6px">
     <a href="https://github.com/vilayat-ali/Inventree/graphs/contributors" alt="Contributors">
         <img src="https://img.shields.io/github/contributors/vilayat-ali/Inventree" />
