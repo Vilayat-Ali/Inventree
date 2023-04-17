@@ -27,19 +27,10 @@ pub enum Route {
     NotFound,
 }
 
-fn handle_routing(
-    route: Route,
-    is_user_authorized: bool,
-) -> Html {
-    let state = use_store_value::<State>();
-
+fn handle_routing(route: Route) -> Html {
     match route {
         Route::Home => html! {<Home />},
-        Route::Dashboard => html! {
-            <AuthProtected is_authorized={is_user_authorized}>
-                <Dashboard />
-            </AuthProtected>
-        },
+        Route::Dashboard => html! {<Dashboard />},
         Route::Login => html! {<Login />},
         Route::Signup => html! {<Signup />},
         Route::NotFound => html! {<NotFound />},
@@ -54,13 +45,13 @@ pub fn App() -> Html {
         if state.is_dark_theme {
             <div data-theme="dark">
                 <BrowserRouter>
-                    <Switch<Route> render={handle_routing(state.is_user_authorized)} />
+                    <Switch<Route> render={handle_routing} />
                 </BrowserRouter>
             </div>
         } else {
             <div data-theme="light">
                 <BrowserRouter>
-                    <Switch<Route> render={handle_routing(state.is_user_authorized)} />
+                    <Switch<Route> render={handle_routing} />
                 </BrowserRouter>
             </div>
         }

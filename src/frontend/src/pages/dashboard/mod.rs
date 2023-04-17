@@ -1,10 +1,14 @@
 use yew::prelude::{function_component, html, Html};
+use yewdux::prelude::*;
 
-use crate::layout::dashboard::DashboardLayout;
+use crate::{layout::dashboard::DashboardLayout, pages::auth::AuthProtected, State};
 
 #[function_component]
 pub fn Dashboard() -> Html {
+    let state = use_store_value::<State>();
+
     html! {
+      <AuthProtected is_authorized={state.is_user_authorized}>
         <DashboardLayout>
         <div class="p-6 bg-gray-100">
         <div class="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mx-auto">
@@ -144,5 +148,6 @@ pub fn Dashboard() -> Html {
             </div>
         </div>
         </DashboardLayout>
+      </AuthProtected>
     }
 }
