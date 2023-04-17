@@ -15,7 +15,6 @@ pub struct Props {
     pub username: String,
     pub email: String,
     pub password: String,
-    pub button_name: String,
 }
 
 #[function_component]
@@ -71,7 +70,7 @@ pub fn SignupForm(props: &Props) -> Html {
                     </label>
                     </div>
                     <div class="form-control mt-6">
-                    <FormButton button_text={props.button_name.clone()} payload={payload_data} handle_click={handle_click}/>
+                    <FormButton button_text="Sign up" payload={payload_data} handle_click={handle_click}/>
                     </div>
                 </div>
                 </div>

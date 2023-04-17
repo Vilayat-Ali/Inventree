@@ -10,7 +10,7 @@ pub fn Login() -> Html {
 
     html! {
         <WebsiteLayout>
-            <LoginForm email={email} password={password} button_name={String::from("Login")}/>
+            <LoginForm email={email} password={password} />
         </WebsiteLayout>
     }
 }
