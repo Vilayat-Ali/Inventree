@@ -6,7 +6,7 @@ use crate::app::Route;
 use yew::prelude::*;
 use yew_router::prelude::use_navigator;
 
-#[derive(Properties, PartialEq)]
+#[derive(Properties, PartialEq, Clone)]
 pub struct Props {
     pub is_authorized: bool,
     pub children: Children,
@@ -15,23 +15,20 @@ pub struct Props {
 #[function_component]
 pub fn AuthProtected(props: &Props) -> Html {
     let navigator = use_navigator().unwrap();
-    let Props {
-        is_authorized,
-        children,
-    } = props;
+    let is_authorized = props.is_authorized.clone();
 
     use_effect_with_deps(
         move |_| {
-            if !(*is_authorized) {
+            if !is_authorized {
                 navigator.push(&Route::Login);
             }
         },
-        props.is_authorized,
+        is_authorized,
     );
 
     html! {
         <div>
-            {children.iter().collect::<Html>()}
+            {props.children.iter().collect::<Html>()}
         </div>
     }
 }

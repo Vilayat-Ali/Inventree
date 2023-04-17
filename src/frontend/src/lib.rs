@@ -37,6 +37,7 @@ pub struct SignupDetails {
 #[derive(Default, Clone, PartialEq, Eq, Store)]
 pub struct State {
     pub menu_state: bool,
+    pub is_user_authorized: bool,
     pub is_dark_theme: bool,
     pub login_details: LoginDetails,
     pub signup_details: SignupDetails,
