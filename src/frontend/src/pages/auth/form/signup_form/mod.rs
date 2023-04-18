@@ -4,10 +4,12 @@ mod input;
 use gloo_console::log;
 use yew::prelude::*;
 use yew_router::prelude::Link;
+use yewdux::prelude::*;
 
 use crate::{
     app::Route,
     pages::auth::form::signup_form::{button::FormButton, button::PayloadData, input::TextInput},
+    {SignupDetails, State},
 };
 
 #[derive(Properties, PartialEq, Clone)]
@@ -19,24 +21,48 @@ pub struct Props {
 
 #[function_component]
 pub fn SignupForm(props: &Props) -> Html {
+    let (state, dispatch) = use_store::<State>();
     let mut payload_data: PayloadData = PayloadData::new(String::new(), String::new());
     //* Create a callback that will respond to data received from another component's callback property
-    let username_callback_data_received = Callback::from(|received_input: String| {
+    let mut signup_details: SignupDetails =
+        SignupDetails::new(String::new(), String::new(), String::new());
+
+    let mut username_callback_data_received = Callback::from(|received_input: String| {
+        signup_details.username = received_input;
         //* Log recieved callback action
         log!(received_input);
     });
 
-    let email_callback_data_received = Callback::from(|received_input: String| {
+    let mut email_callback_data_received = Callback::from(|received_input: String| {
+        signup_details.email = received_input;
         //* Log recieved callback action
         log!(received_input);
     });
 
-    let password_callback_data_received = Callback::from(|received_input: String| {
+    let mut password_callback_data_received = Callback::from(|received_input: String| {
+        signup_details.password = received_input;
         //* Log recieved callback action
         log!(received_input);
     });
 
-    let handle_click = { Callback::from(move |_| log!("Hello")) };
+    let handle_click = Callback::from(move |_| {
+        let SignupDetails {
+            username,
+            email,
+            password,
+        } = signup_details;
+
+        if username.len() == 0 || email.len() == 0 || password.len() == 0 {
+            log!("Bhaiyya fields toh bhar lo!");
+        } else {
+            log!(format!("{} with email {} is registered", username, email));
+        }
+    });
+
+    use_effect(move || {
+        // clean up
+        || dispatch.reduce_mut_callback(|s| s.signup_details = SignupDetails::new())
+    });
 
     html! {
       <>

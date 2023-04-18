@@ -1,12 +1,9 @@
+use crate::routes::user::create::create_user;
+
 #[macro_use]
 pub extern crate rocket;
 
-#[get("/")]
-fn index() -> &'static str {
-    "Hello, world!"
-}
-
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![index])
+    rocket::build().mount("/api", routes![index])
 }
