@@ -24,8 +24,7 @@ pub fn SignupForm(props: &Props) -> Html {
     let (state, dispatch) = use_store::<State>();
     let mut payload_data: PayloadData = PayloadData::new(String::new(), String::new());
     //* Create a callback that will respond to data received from another component's callback property
-    let mut signup_details: SignupDetails =
-        SignupDetails::new(String::new(), String::new(), String::new());
+    let mut signup_details: SignupDetails = SignupDetails::default();
 
     let mut username_callback_data_received = Callback::from(|received_input: String| {
         signup_details.username = received_input;
@@ -61,7 +60,9 @@ pub fn SignupForm(props: &Props) -> Html {
 
     use_effect(move || {
         // clean up
-        || dispatch.reduce_mut_callback(|s| s.signup_details = SignupDetails::new())
+        || {
+            dispatch.reduce_mut_callback(|s| s.signup_details = SignupDetails::default());
+        }
     });
 
     html! {

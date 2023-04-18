@@ -34,6 +34,15 @@ impl LoginDetails {
     }
 }
 
+impl std::default::Default for LoginDetails {
+    fn default() -> Self {
+        Self {
+            email: String::new(),
+            password: String,
+        }
+    }
+}
+
 /// Signup detail struct
 #[derive(Clone, PartialEq, Eq, Default)]
 pub struct SignupDetails {
@@ -52,6 +61,16 @@ impl SignupDetails {
             username,
             email,
             password,
+        }
+    }
+}
+
+impl std::default::Default for SignupDetails {
+    fn default() -> Self {
+        Self {
+            username: String::new(),
+            email: String::new(),
+            password: String,
         }
     }
 }
