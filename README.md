@@ -11,6 +11,11 @@
     </a>
 </p> 
 
+## Know each aspect of this project in detail
+
+- [Frontend](./markups/frontend.md)
+- [Backend](./markups/backend.md)
+- [Utils](./markups/utils.md)
 
 ## Description
 Hey there! Welcome to my inventory management system project! This is a full stack web app that I built using a combination of Node.js, Rust, MongoDB, Jsonwebtoken, Tailwindcss, Daisyui, and Web Assembly.
