@@ -23,7 +23,6 @@ pub struct Props {
 pub fn SignupForm(props: &Props) -> Html {
     let (state, dispatch) = use_store::<State>();
     let mut payload_data: PayloadData = PayloadData::new(String::new(), String::new());
-    //* Create a callback that will respond to data received from another component's callback property
     let mut signup_details: SignupDetails = SignupDetails::default();
 
     let mut username_callback_data_received = Callback::from(|received_input: String| {

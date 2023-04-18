@@ -1,9 +1,13 @@
 use yew::prelude::{function_component, html, Html};
+use yew_router::prelude::*;
 
 use crate::layout::website::WebsiteLayout;
 
 #[function_component]
 pub fn Home() -> Html {
+    let navigator = use_navigator();
+    let go_to_dashboard = Callback::from(move |_| navigator.push(&Route::Dashboard));
+
     html! {
         <WebsiteLayout>
             <section class="relative py-20">
@@ -12,7 +16,7 @@ pub fn Home() -> Html {
                         <div class="relative flex flex-col items-center justify-center h-full">
                         <h1 class="text-5xl font-bold text-center text-white mb-6">{"Introducing Inventree"}</h1>
                         <p class="text-2xl text-center text-gray-300 mb-8">{"The ultimate inventory management system for your business"}</p>
-                        <a href="#" class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-4 px-8 rounded-full">{"Get Started"}</a>
+                        <a onclick={go_to_dashboard} class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-4 px-8 rounded-full">{"Go to Dashboard"}</a>
                         </div>
                     </div>
                 <img src="assets/img/home-hero.jpg" alt="Inventree Hero Image" class="absolute inset-0 object-cover w-full h-full" loading="lazy" />
