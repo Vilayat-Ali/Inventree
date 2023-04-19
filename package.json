@@ -1,5 +1,6 @@
 {
   "name": "inventree",
+  "private": true,
   "version": "1.0.0",
   "description": "Full-Stack web application for inventory management, powered by Rust and Web Assembly, built with using rust programming language",
   "main": "index.js",

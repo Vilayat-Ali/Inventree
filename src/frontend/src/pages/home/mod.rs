@@ -1,7 +1,7 @@
-use yew::prelude::{function_component, html, Html};
+use yew::prelude::{function_component, html, Html, Callback};
 use yew_router::prelude::*;
 
-use crate::{layout::website::WebsiteLayout, Route};
+use crate::{layout::website::WebsiteLayout, app::Route};
 
 #[function_component]
 pub fn Home() -> Html {

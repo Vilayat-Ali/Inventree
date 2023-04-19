@@ -23,48 +23,52 @@ pub struct Props {
 pub fn SignupForm(props: &Props) -> Html {
     let (state, dispatch) = use_store::<State>();
     let mut payload_data: PayloadData = PayloadData::new(String::new(), String::new());
-    let mut signup_details: SignupDetails = SignupDetails::default();
+
+    // input value states
+    let username = use_state(|| String::new());
+    let email = use_state(|| String::new());
+    let password = use_state(|| String::new());
 
     let username_callback_data_received: Callback<String> =
         Callback::from(|received_input: String| {
-            dispatch.reduce_mut_callback(|s| s.signup_details.username = received_input);
             //* Log recieved callback action
             log!(received_input);
         });
 
     let email_callback_data_received: Callback<String> =
         Callback::from(|received_input: String| {
-            dispatch.reduce_mut_callback(|s| s.signup_details.email = received_input);
             //* Log recieved callback action
             log!(received_input);
         });
 
     let password_callback_data_received: Callback<String> =
         Callback::from(|received_input: String| {
-            dispatch.reduce_mut_callback(|s| s.signup_details.password = received_input);
             //* Log recieved callback action
             log!(received_input);
         });
 
     let handle_click = Callback::from(move |_| {
-        if &state.signup_details.username.len() == 0
-            || &state.signup_details.email.len() == 0
-            || &state.signup_details.password.len() == 0
+        if state.signup_details.username.len() == 0
+            || state.signup_details.email.len() == 0
+            || state.signup_details.password.len() == 0
         {
             log!("Bhaiyya fields toh bhar lo!");
         } else {
+            dispatch.reduce_mut_callback(|s| {
+                s.signup_details.username = *username;
+                s.signup_details.email = *email;
+                s.signup_details.password = *password;
+            });
             log!(format!(
                 "{} with email {} is registered",
-                &state.signup_details.username, state.sign.email
+                &state.signup_details.username, &state.signup_details.email
             ));
         }
     });
 
     use_effect(move || {
         // clean up
-        || {
-            dispatch.reduce_mut_callback(|s| s.signup_details = SignupDetails::default());
-        }
+        || dispatch.reduce_mut_callback(|s| s.signup_details = SignupDetails::default());
     });
 
     html! {
