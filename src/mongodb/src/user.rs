@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use mongodb::{
     bson::{doc, oid::ObjectId},
     options::ClientOptions,

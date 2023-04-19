@@ -1,11 +1,11 @@
 use yew::prelude::{function_component, html, Html};
 use yew_router::prelude::*;
 
-use crate::layout::website::WebsiteLayout;
+use crate::{layout::website::WebsiteLayout, Route};
 
 #[function_component]
 pub fn Home() -> Html {
-    let navigator = use_navigator();
+    let navigator = use_navigator().unwrap();
     let go_to_dashboard = Callback::from(move |_| navigator.push(&Route::Dashboard));
 
     html! {

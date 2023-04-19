@@ -25,35 +25,38 @@ pub fn SignupForm(props: &Props) -> Html {
     let mut payload_data: PayloadData = PayloadData::new(String::new(), String::new());
     let mut signup_details: SignupDetails = SignupDetails::default();
 
-    let mut username_callback_data_received = Callback::from(|received_input: String| {
-        signup_details.username = received_input;
-        //* Log recieved callback action
-        log!(received_input);
-    });
+    let username_callback_data_received: Callback<String> =
+        Callback::from(|received_input: String| {
+            dispatch.reduce_mut_callback(|s| s.signup_details.username = received_input);
+            //* Log recieved callback action
+            log!(received_input);
+        });
 
-    let mut email_callback_data_received = Callback::from(|received_input: String| {
-        signup_details.email = received_input;
-        //* Log recieved callback action
-        log!(received_input);
-    });
+    let email_callback_data_received: Callback<String> =
+        Callback::from(|received_input: String| {
+            dispatch.reduce_mut_callback(|s| s.signup_details.email = received_input);
+            //* Log recieved callback action
+            log!(received_input);
+        });
 
-    let mut password_callback_data_received = Callback::from(|received_input: String| {
-        signup_details.password = received_input;
-        //* Log recieved callback action
-        log!(received_input);
-    });
+    let password_callback_data_received: Callback<String> =
+        Callback::from(|received_input: String| {
+            dispatch.reduce_mut_callback(|s| s.signup_details.password = received_input);
+            //* Log recieved callback action
+            log!(received_input);
+        });
 
     let handle_click = Callback::from(move |_| {
-        let SignupDetails {
-            username,
-            email,
-            password,
-        } = signup_details;
-
-        if username.len() == 0 || email.len() == 0 || password.len() == 0 {
+        if &state.signup_details.username.len() == 0
+            || &state.signup_details.email.len() == 0
+            || &state.signup_details.password.len() == 0
+        {
             log!("Bhaiyya fields toh bhar lo!");
         } else {
-            log!(format!("{} with email {} is registered", username, email));
+            log!(format!(
+                "{} with email {} is registered",
+                &state.signup_details.username, state.sign.email
+            ));
         }
     });
 

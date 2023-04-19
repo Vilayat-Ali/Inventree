@@ -10,7 +10,7 @@
     "dev:css": "yarn tailwindcss --watch -c ./tailwind.config.js -o ./src/frontend/css/style.css",
     "dev:check": "cargo clippy",
     "doc": "cargo doc --workspace --no-deps --target-dir ./docs",
-    "start": "yarn install && yarn tailwindcss -c ./tailwind.config.js -o ./src/frontend/css/style.css --minify"
+    "start": "yarn install && yarn tailwindcss -c ./tailwind.config.js -o ./src/frontend/css/style.css --minify && cd ./src/frontend && trunk build --release"
   },
   "dependencies": {
     "daisyui": "^2.51.5",

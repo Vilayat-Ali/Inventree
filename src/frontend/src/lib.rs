@@ -25,54 +25,12 @@ pub struct LoginDetails {
     pub password: String,
 }
 
-impl LoginDetails {
-    pub fn new(
-        email: String,
-        password: String,
-    ) -> Self {
-        Self { email, password }
-    }
-}
-
-impl std::default::Default for LoginDetails {
-    fn default() -> Self {
-        Self {
-            email: String::new(),
-            password: String,
-        }
-    }
-}
-
 /// Signup detail struct
 #[derive(Clone, PartialEq, Eq, Default)]
 pub struct SignupDetails {
     pub email: String,
     pub username: String,
     pub password: String,
-}
-
-impl SignupDetails {
-    pub fn new(
-        email: String,
-        username: String,
-        password: String,
-    ) -> Self {
-        Self {
-            username,
-            email,
-            password,
-        }
-    }
-}
-
-impl std::default::Default for SignupDetails {
-    fn default() -> Self {
-        Self {
-            username: String::new(),
-            email: String::new(),
-            password: String,
-        }
-    }
 }
 
 /// Equivalent to store in redux

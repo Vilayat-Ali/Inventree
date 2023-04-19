@@ -2,7 +2,7 @@ use std::fmt::Debug;
 
 use serde::*;
 
-#[derive(Serialize, Debug, Deserialize)]
+#[derive(Serialize, Debug, Deserialize, Clone)]
 pub struct Response<T> {
     status: u32,
     success: bool,
