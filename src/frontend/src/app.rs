@@ -6,7 +6,7 @@ use yewdux::prelude::use_store_value;
 
 // importing pages
 use crate::pages::{
-    auth::{login::Login, signup::Signup, AuthProtected},
+    auth::{login::Login, signup::Signup},
     dashboard::Dashboard,
     home::Home,
     not_found::NotFound,

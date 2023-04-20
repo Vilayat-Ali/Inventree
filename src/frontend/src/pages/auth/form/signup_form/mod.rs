@@ -9,7 +9,7 @@ use yewdux::prelude::*;
 use crate::{
     app::Route,
     pages::auth::form::signup_form::{button::FormButton, button::PayloadData, input::TextInput},
-    {SignupDetails, State},
+    State,
 };
 
 #[derive(Properties, PartialEq, Clone)]
@@ -22,7 +22,7 @@ pub struct Props {
 #[function_component]
 pub fn SignupForm(props: &Props) -> Html {
     let (state, dispatch) = use_store::<State>();
-    let mut payload_data: PayloadData = PayloadData::new(String::new(), String::new());
+    let payload_data: PayloadData = PayloadData::new(String::new(), String::new());
 
     // input value states
     let username = use_state(|| String::new());
@@ -54,11 +54,6 @@ pub fn SignupForm(props: &Props) -> Html {
         {
             log!("Bhaiyya fields toh bhar lo!");
         } else {
-            dispatch.reduce_mut_callback(|s| {
-                s.signup_details.username = *username;
-                s.signup_details.email = *email;
-                s.signup_details.password = *password;
-            });
             log!(format!(
                 "{} with email {} is registered",
                 &state.signup_details.username, &state.signup_details.email
@@ -68,7 +63,7 @@ pub fn SignupForm(props: &Props) -> Html {
 
     use_effect(move || {
         // clean up
-        || dispatch.reduce_mut_callback(|s| s.signup_details = SignupDetails::default());
+        || {}
     });
 
     html! {

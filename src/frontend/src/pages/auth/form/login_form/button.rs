@@ -1,8 +1,6 @@
 use gloo_console::log;
 use yew::prelude::*;
 
-use super::_Props::password;
-
 #[derive(PartialEq, Clone)]
 pub struct PayloadData {
     pub email_data: String,

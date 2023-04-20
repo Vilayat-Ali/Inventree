@@ -5,12 +5,10 @@ use crate::pages::auth::form::login_form::LoginForm;
 
 #[function_component]
 pub fn Login() -> Html {
-    let mut email = String::new();
-    let mut password = String::new();
 
     html! {
         <WebsiteLayout>
-            <LoginForm email={email} password={password} />
+            <LoginForm email={String::new()} password={String::new()} />
         </WebsiteLayout>
     }
 }
