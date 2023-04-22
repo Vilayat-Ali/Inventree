@@ -1,26 +1,22 @@
-use yew::prelude::{function_component, html, Html, Callback};
+use yew::prelude::{function_component, html, Html};
 use yew_router::prelude::*;
 
-use crate::{layout::website::WebsiteLayout, app::Route};
+use crate::{app::Route, layout::website::WebsiteLayout};
 
 #[function_component]
 pub fn Home() -> Html {
-    let navigator = use_navigator().unwrap();
-    let go_to_dashboard = Callback::from(move |_| navigator.push(&Route::Dashboard));
-
     html! {
         <WebsiteLayout>
-            <section class="relative py-20">
-                <div class="absolute inset-0 w-full h-full bg-gray-900 opacity-75"></div>
-                    <div class="container mx-auto px-4 py-12">
-                        <div class="relative flex flex-col items-center justify-center h-full">
-                        <h1 class="text-5xl font-bold text-center text-white mb-6">{"Introducing Inventree"}</h1>
-                        <p class="text-2xl text-center text-gray-300 mb-8">{"The ultimate inventory management system for your business"}</p>
-                        <a onclick={go_to_dashboard} class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-4 px-8 rounded-full">{"Go to Dashboard"}</a>
-                        </div>
-                    </div>
-                <img src="assets/img/home-hero.jpg" alt="Inventree Hero Image" class="absolute inset-0 object-cover w-full h-full" loading="lazy" />
-            </section>
+            <div class="hero min-h-screen bg-base-200">
+                <div class="hero-content flex-col lg:flex-row">
+                <img src="assets/img/home-hero-img.jpg" class="max-w-sm rounded-lg shadow-2xl" />
+                <div>
+                    <h1 class="text-5xl font-bold">{"Inventree. Profits, Restocked!"}</h1>
+                    <p class="py-6">{"Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi."}</p>
+                    <Link<Route> to={Route::Dashboard}>{"Go Dashboard"}</Link<Route>>
+                </div>
+                </div>
+            </div>
 
             <section class="bg-white py-10">
                 <div class="container mx-auto">

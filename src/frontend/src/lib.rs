@@ -5,9 +5,12 @@ pub mod pages;
 pub mod utils;
 
 // wee_alloc for allocator for WASM
+extern crate wee_alloc;
+
 // reduce the size of the wasm bundle
-// #[global_allocator]
-// static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+// using wee_alloc as global allocator
+#[global_allocator]
+static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 // console.log
 pub use gloo_console::{error, info, log, table, warn};
