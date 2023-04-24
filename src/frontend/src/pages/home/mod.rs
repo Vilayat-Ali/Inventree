@@ -1,6 +1,7 @@
 use yew::prelude::{function_component, html, Html};
 use yew_router::prelude::*;
 
+use crate::components::table::Table;
 use crate::{app::Route, layout::website::WebsiteLayout};
 
 #[function_component]
@@ -11,9 +12,12 @@ pub fn Home() -> Html {
                 <div class="hero-content flex-col lg:flex-row">
                 <img src="assets/img/home-hero-img.jpg" class="max-w-sm rounded-lg shadow-2xl" />
                 <div>
-                    <h1 class="text-5xl font-bold">{"Inventree. Profits, Restocked!"}</h1>
+                    <h1 class="text-5xl font-bold">{"Inventree"}</h1>
+                    <h4 class="text-xl font-bold text-secondary">{"Profits, Restocked!"}</h4>
                     <p class="py-6">{"Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi."}</p>
-                    <Link<Route> to={Route::Dashboard}>{"Go Dashboard"}</Link<Route>>
+                    <Link<Route> to={Route::Dashboard}>
+                        <button class="btn btn-primary">{"Go Dashboard"}</button>
+                    </Link<Route>>
                 </div>
                 </div>
             </div>
@@ -22,32 +26,32 @@ pub fn Home() -> Html {
                 <div class="container mx-auto">
                     <h2 class="text-4xl font-bold mb-10 text-center">{"Features"}</h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                    <div class="p-6 bg-gray-100 rounded-lg">
+                    <div class="p-6 bg-base-100 rounded-lg">
                         <i class="mdi mdi-lock text-4xl text-gray-500 mb-5"></i>
                         <h3 class="text-2xl font-bold mb-5">{"Secure"}</h3>
                         <p class="text-gray-500">{"Our platform is designed with security in mind. We use the latest encryption and security technologies to keep your data safe and secure."}</p>
                     </div>
-                    <div class="p-6 bg-gray-100 rounded-lg">
+                    <div class="p-6 bg-base-100 rounded-lg">
                         <i class="mdi mdi-chart-bar text-4xl text-gray-500 mb-5"></i>
                         <h3 class="text-2xl font-bold mb-5">{"Analytics"}</h3>
                         <p class="text-gray-500">{"Get insights into your data with our powerful analytics tools. Analyze your inventory trends and make data-driven decisions."}</p>
                     </div>
-                    <div class="p-6 bg-gray-100 rounded-lg">
+                    <div class="p-6 bg-base-100 rounded-lg">
                         <i class="mdi mdi-sync text-4xl text-gray-500 mb-5"></i>
                         <h3 class="text-2xl font-bold mb-5">{"Integration"}</h3>
                         <p class="text-gray-500">{"Integrate Inventree with your favorite e-commerce platforms and marketplaces. Sync inventory levels and streamline your operations."}</p>
                     </div>
-                    <div class="p-6 bg-gray-100 rounded-lg">
+                    <div class="p-6 bg-base-100 rounded-lg">
                         <i class="mdi mdi-shield-check text-4xl text-gray-500 mb-5"></i>
                         <h3 class="text-2xl font-bold mb-5">{"Compliance"}</h3>
                         <p class="text-gray-500">{"Stay compliant with industry regulations and standards. Our platform is designed to help you comply with all necessary regulations."}</p>
                     </div>
-                    <div class="p-6 bg-gray-100 rounded-lg">
+                    <div class="p-6 bg-base-100 rounded-lg">
                         <i class="mdi mdi-account-multiple text-4xl text-gray-500 mb-5"></i>
                         <h3 class="text-2xl font-bold mb-5">{"Collaboration"}</h3>
                         <p class="text-gray-500">{"Collaborate with your team in real-time. Our platform allows you to share inventory data with your team members and work together seamlessly."}</p>
                     </div>
-                    <div class="p-6 bg-gray-100 rounded-lg">
+                    <div class="p-6 bg-base-100 rounded-lg">
                         <i class="mdi mdi-cogs text-4xl text-gray-500 mb-5"></i>
                         <h3 class="text-2xl font-bold mb-5">{"Customization"}</h3>
                         <p class="text-gray-500">{"Customize Inventree to fit your business needs. Our platform offers a wide range of customization options to help you tailor the platform to your requirements."}</p>
@@ -56,9 +60,9 @@ pub fn Home() -> Html {
                 </div>
             </section>
 
-            <section class="py-20 bg-gray-100">
+            <section class="py-20 bg-base-100">
                 <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">{"Pricing"}</h2>
+                <h2 class="text-4xl font-bold text-center text-base-800 mb-8">{"Pricing"}</h2>
                     <div class="flex flex-col md:flex-row justify-center">
                         <div class="bg-white rounded-lg shadow-md mx-4 mb-8 md:mb-0 max-w-sm">
                         <div class="py-8 px-6">
@@ -150,6 +154,12 @@ pub fn Home() -> Html {
                         </div>
                     </div>
             </section>
+
+            <Table header={vec![String::from("Name"), String::from("Age"), String::from("Email")]}
+                rows={
+                    vec![vec![String::from("Ali"), String::from("12"), String::from("vilayatcodemysite@gmail.com")]; 10]
+                }
+            />
         </WebsiteLayout>
     }
 }

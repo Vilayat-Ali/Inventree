@@ -22,4 +22,4 @@ mongodb = { path = "../mongodb" }
 # user defined crates
 common = { path = "../common" }
 auth = { path = "../utils/auth" }
-security = { path = "../utils/security" }
+env = { path = "../utils/env" }

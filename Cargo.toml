@@ -12,6 +12,6 @@ members = [
     # Utils
     # Auth (JWT Token)
     "src/utils/auth",
-    # Security Audits
-    "src/utils/security"
+    # Environment variables
+    "src/utils/env"
 ]

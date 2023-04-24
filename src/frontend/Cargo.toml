@@ -5,10 +5,15 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[profile.dev]
+incremental = true
+codegen-units = 256
+
 [profile.release]
 panic = 'abort'
 codegen-units = 1
 opt-level = 'z'
+incremental = true
 lto = true
 
 [dependencies]
@@ -26,6 +31,6 @@ web-sys = "0.3.61"
 
 # User crates
 common = { path = "../common" }
-security = { path = "../utils/security" }
+env = { path = "../utils/env" }
 
 

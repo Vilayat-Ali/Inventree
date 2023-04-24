@@ -19,7 +19,7 @@ pub use gloo_console::{error, info, log, table, warn};
 use yewdux::prelude::*;
 
 /// importing the frontend envs
-pub use security::{import_envs, FrontendConfig};
+pub use env::{import_envs, FrontendConfig};
 
 /// Login detail struct
 #[derive(Clone, PartialEq, Eq, Default)]

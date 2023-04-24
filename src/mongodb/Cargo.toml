@@ -8,3 +8,6 @@ edition = "2021"
 [dependencies]
 mongodb = "2.4.0"
 tokio = "1.27.0"
+
+# environment
+env = { path = "../utils/env" }
