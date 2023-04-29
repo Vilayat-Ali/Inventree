@@ -16,10 +16,12 @@ opt-level = 3
 lto = "thin"
 
 [dependencies]
-rocket = { version = "=0.5.0-rc.3", features = ["json"] }
-mongodb = { path = "../mongodb" }
+actix-web = "4.3.1"
+tokio = { version = "1.28.0", features = ["full"] }
 
 # user defined crates
 common = { path = "../common" }
+mongodb = { path = "../mongodb" }
 auth = { path = "../utils/auth" }
 env = { path = "../utils/env" }
+

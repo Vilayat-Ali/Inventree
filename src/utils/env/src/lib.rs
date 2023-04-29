@@ -21,7 +21,7 @@ pub struct FrontendConfig {
 
 #[derive(Deserialize, Debug)]
 pub struct BackendConfig {
-    pub foo: String,
+    pub server_port: String,
 }
 
 pub fn import_envs<T>() -> Result<T, envy::Error>
