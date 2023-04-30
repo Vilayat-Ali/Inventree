@@ -21,29 +21,10 @@ pub struct Props {
 
 #[function_component]
 pub fn LoginForm(props: &Props) -> Html {
-    let (_state, dispatch) = use_store::<State>();
-    let mut email = use_state(|| String::new());
-    let mut password = use_state(|| String::new());
-
-    //* Create a callback that will respond to data received from another component's callback property
-    let email_callback_data_received = Callback::from(move |received_input: String| {
-        //* Log recieved callback action
-        log!(received_input.clone());
-        Callback::from(move || email.set(received_input.clone()))
+    let handle_click = Callback::from(move |_| {
+        log!("Hello");
+        log!("Hello");
     });
-
-    let password_callback_data_received = Callback::from(move |received_input: String| {
-        //* Log recieved callback action
-        log!(received_input.clone());
-        Callback::from(move || password.set(received_input.clone()))
-    });
-
-    let handle_click = {
-        Callback::from(move |_| {
-            log!(format!("Email: {:#?}", *email));
-            log!(format!("Password: {:#?}", *password));
-        })
-    };
 
     html! {
       <>
@@ -59,13 +40,13 @@ pub fn LoginForm(props: &Props) -> Html {
                     <label class="label">
                         <span class="label-text">{"Email"}</span>
                     </label>
-                    <TextInput placeholder={String::from("Email")} value={props.email.clone()} on_change={email_callback_data_received} />
+                    <TextInput placeholder={String::from("Email")} />
                     </div>
                     <div class="form-control">
                     <label class="label">
                         <span class="label-text">{"Password"}</span>
                     </label>
-                    <TextInput placeholder={String::from("Password")} value={props.password.clone()} on_change={password_callback_data_received} />
+                    <TextInput placeholder={String::from("Password")} />
                     <label class="label">
                         <Link<Route> to={Route::Signup}><a class="label-text-alt link link-hover">{"New User? Create Account"}</a></Link<Route>>
                     </label>
