@@ -4,10 +4,10 @@ use serde::*;
 
 #[derive(Serialize, Debug, Deserialize, Clone)]
 pub struct Response<T> {
-    status: u32,
-    success: bool,
-    message: String,
-    data: Option<T>,
+    pub status: u32,
+    pub success: bool,
+    pub message: String,
+    pub data: Option<T>,
 }
 
 impl<T> Response<T>
@@ -15,12 +15,7 @@ where
     T: Serialize + for<'a> Deserialize<'a>,
 {
     // new instance
-    pub fn new(
-        status: u32,
-        success: bool,
-        message: String,
-        data: Option<T>,
-    ) -> Self {
+    pub fn new(status: u32, success: bool, message: String, data: Option<T>) -> Self {
         Self {
             status,
             success,

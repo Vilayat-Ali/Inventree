@@ -9,25 +9,25 @@ use serde::Deserialize;
 // }
 
 #[derive(Deserialize, Debug)]
-pub struct Config {
-    pub frontend_envs: FrontendConfig,
-    pub backend_envs: BackendConfig,
-}
-
-#[derive(Deserialize, Debug)]
 pub struct FrontendConfig {
     pub foo: String,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct BackendConfig {
-    pub server_port: String,
+    pub server: u16,
 }
 
-pub fn import_envs<T>() -> Result<T, envy::Error>
+pub fn import_envs<T>() -> Option<T>
 where
     T: for<'a> Deserialize<'a>,
 {
-    let config = envy::from_env::<T>()?;
-    Ok(config)
+    match envy::from_env::<BackendConfig>() {
+        Ok(config) => println!("{:#?}", config),
+        Err(e) => eprintln!("{:#?}", e),
+    }
+    match envy::from_env::<T>() {
+        Ok(config) => Some(config),
+        Err(_e) => None,
+    }
 }

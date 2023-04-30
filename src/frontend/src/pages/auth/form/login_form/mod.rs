@@ -8,7 +8,10 @@ use yew_router::prelude::Link;
 use crate::{
     app::Route,
     pages::auth::form::login_form::{button::FormButton, button::PayloadData, input::TextInput},
+    State,
 };
+
+use yewdux::prelude::*;
 
 #[derive(Properties, PartialEq, Clone)]
 pub struct Props {
@@ -18,16 +21,19 @@ pub struct Props {
 
 #[function_component]
 pub fn LoginForm(props: &Props) -> Html {
-    let mut payload_data: PayloadData = PayloadData::new(String::new(), String::new());
+    let (state, dispatch) = use_store::<State>();
+
     //* Create a callback that will respond to data received from another component's callback property
     let email_callback_data_received = Callback::from(|received_input: String| {
         //* Log recieved callback action
-        log!(received_input);
+        dispatch.reduce_mut(|s| s.login_details.email = received_input.clone());
+        log!(received_input.clone());
     });
 
     let password_callback_data_received = Callback::from(|received_input: String| {
         //* Log recieved callback action
-        log!(received_input);
+        dispatch.reduce_mut(|s| s.login_details.password = received_input.clone());
+        log!(received_input.clone());
     });
 
     let handle_click = { Callback::from(move |_| log!("Hello")) };
@@ -38,7 +44,7 @@ pub fn LoginForm(props: &Props) -> Html {
             <div class="hero-content flex-col lg:flex-row-reverse">
                 <div class="text-center lg:text-left">
                 <h1 class="text-5xl font-bold">{"Login now!"}</h1>
-                <p class="py-6">{"Welcome back! Please enter your login credentials below to access your account. If you have forgotten your password, you can reset it using the 'Forgot Password' link. If you don't have an account yet, you can create one by clicking the 'Create Account' button."}</p>
+                <p class="py-6">{"Welcome back! Please enter your login credentials below to access your account."}<br /> {"If you have forgotten your password, you can reset it using the 'Forgot Password' link. If you don't have an account yet, you can create one by clicking the 'Create Account' button."}</p>
                 </div>
                 <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                 <div class="card-body">
@@ -58,7 +64,7 @@ pub fn LoginForm(props: &Props) -> Html {
                     </label>
                     </div>
                     <div class="form-control mt-6">
-                    <FormButton button_text="Login" payload={payload_data} handle_click={handle_click}/>
+                    <FormButton button_text="Login" handle_click={handle_click}/>
                     </div>
                 </div>
                 </div>
