@@ -2,6 +2,7 @@ use gloo_console::log;
 use wasm_bindgen::JsCast;
 use web_sys::{Event, HtmlInputElement};
 use yew::prelude::*;
+use yewdux::dispatch;
 
 #[derive(Clone, PartialEq, Properties)]
 pub struct Props {
@@ -11,6 +12,8 @@ pub struct Props {
 /// Controlled Text Input Component
 #[function_component]
 pub fn TextInput(props: &Props) -> Html {
+    let (_state, dispatch) = use_store::<State>();
+
     let onchange = Callback::from(|e: Event| {
         let value: String = e
             .target()
@@ -18,7 +21,7 @@ pub fn TextInput(props: &Props) -> Html {
             .unchecked_into::<HtmlInputElement>()
             .value();
 
-        log!(format!("{} : {}", props.placeholder.clone(), value));
+        log!(format!("{}", value));
     });
 
     html! {
