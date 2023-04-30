@@ -7,7 +7,7 @@ use yew_router::prelude::Link;
 
 use crate::{
     app::Route,
-    pages::auth::form::login_form::{button::FormButton, button::PayloadData, input::TextInput},
+    pages::auth::form::login_form::{button::FormButton, input::TextInput},
     State,
 };
 
@@ -21,22 +21,29 @@ pub struct Props {
 
 #[function_component]
 pub fn LoginForm(props: &Props) -> Html {
-    let (state, dispatch) = use_store::<State>();
+    let (_state, dispatch) = use_store::<State>();
+    let mut email = use_state(|| String::new());
+    let mut password = use_state(|| String::new());
 
     //* Create a callback that will respond to data received from another component's callback property
-    let email_callback_data_received = Callback::from(|received_input: String| {
+    let email_callback_data_received = Callback::from(move |received_input: String| {
         //* Log recieved callback action
-        dispatch.reduce_mut(|s| s.login_details.email = received_input.clone());
         log!(received_input.clone());
+        Callback::from(move || email.set(received_input.clone()))
     });
 
-    let password_callback_data_received = Callback::from(|received_input: String| {
+    let password_callback_data_received = Callback::from(move |received_input: String| {
         //* Log recieved callback action
-        dispatch.reduce_mut(|s| s.login_details.password = received_input.clone());
         log!(received_input.clone());
+        Callback::from(move || password.set(received_input.clone()))
     });
 
-    let handle_click = { Callback::from(move |_| log!("Hello")) };
+    let handle_click = {
+        Callback::from(move |_| {
+            log!(format!("Email: {:#?}", *email));
+            log!(format!("Password: {:#?}", *password));
+        })
+    };
 
     html! {
       <>
