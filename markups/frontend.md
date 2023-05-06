@@ -4,7 +4,7 @@
 
 ## Description
 
-A brief description of the project goes here.
+The frontend of the application is based on web-assembly. The project is scaffolded using yew.rs and uses wasm-bidgen and wasm32-unknown-unknown to package webassembly for the browser.
 
 ## Table of Contents
 
