@@ -6,7 +6,7 @@ use crate::layout::website::WebsiteLayout;
 pub fn Login() -> Html {
     html! {
         <WebsiteLayout>
-            <h1>{"Login"}</h1>
+            <h1>{"Login cange"}</h1>
         </WebsiteLayout>
     }
 }
