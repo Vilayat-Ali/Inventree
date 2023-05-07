@@ -5,79 +5,51 @@ use yew::{
 
 use crate::layout::website::WebsiteLayout;
 
-struct LoginDetails {
-    email: Option<String>,
-    password: Option<String>,
-}
-
-impl LoginDetails {
-    fn new() -> Self {
-        Self {
-            email: None,
-            password: None,
-        }
-    }
-}
-
 #[function_component]
 pub fn Login() -> Html {
-    // state
-    let email = use_state(|| String::new());
-    let password = use_state(|| String::new());
-
-    let handle_email = Callback::from(move |_| {
-        let email = email.clone();
-        email.set(String::from("New"))
-    });
-
-    let handle_password = Callback::from(move |_| {
-        let password = password.clone();
-        password.set(String::from("Newly"))
-    });
-
     html! {
         <WebsiteLayout>
-            <div class="body-bg min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0" style="font-family:'Lato',sans-serif;">
-            <header class="max-w-lg mx-auto">
-                <a href="#">
-                    <h1 class="text-4xl font-bold text-white text-center">{"Startup"}</h1>
+        <section class="bg-gray-50 dark:bg-gray-900">
+            <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+                <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+                    <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
+                    {"Flowbite"}
                 </a>
-            </header>
-
-            <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
-                <section>
-                    <h3 class="font-bold text-2xl">{"Welcome to Startup"}</h3>
-                    <p class="text-gray-600 pt-2">{"Sign in to your account."}</p>
-                </section>
-
-                <section class="mt-10">
-                    <form class="flex flex-col" method="POST" action="#">
-                        <div class="mb-6 pt-3 rounded bg-gray-200">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="email">{"Email"}</label>
-                            <input type="text" id="email" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" onchange={handle_email} />
-                        </div>
-                        <div class="mb-6 pt-3 rounded bg-gray-200">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="password">{"Password"}</label>
-                            <input type="password" id="password" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" onchange={handle_password} />
-                        </div>
-                        <div class="flex justify-end">
-                            <a href="#" class="text-sm text-purple-600 hover:text-purple-700 hover:underline mb-6">{"Forgot your password?"}</a>
-                        </div>
-                        <button class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">{"Sign In"}</button>
-                    </form>
-                </section>
-            </main>
-
-            <div class="max-w-lg mx-auto text-center mt-12 mb-6">
-                <p class="text-white">{"Don't have an account? "}<a href="#" class="font-bold hover:underline">{"Sign up"}</a>{"."}</p>
+                <div class="w-60 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                        <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                            {"Sign in to your account"}
+                        </h1>
+                        <form class="space-y-4 md:space-y-6" action="#">
+                            <div>
+                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{"Your email"}</label>
+                                <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" />
+                            </div>
+                            <div>
+                                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{"Password"}</label>
+                                <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-start">
+                                    <div class="flex items-center h-5">
+                                        <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"  />
+                                    </div>
+                                    <div class="ml-3 text-sm">
+                                        <label for="remember" class="text-gray-500 dark:text-gray-300">{"Remember me"}</label>
+                                    </div>
+                                </div>
+                                <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">{"Forgot password?"}</a>
+                            </div>
+                            <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">{"Sign in"}</button>
+                            <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                                {"Don't have an account yet?"}
+                                <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">{"Sign up"}</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <footer class="max-w-lg mx-auto flex justify-center text-white">
-                <a href="#" class="hover:underline">{"Contact"}</a>
-                <span class="mx-3">{"•"}</span>
-                <a href="#" class="hover:underline">{"Privacy"}</a>
-            </footer>
-        </div>
+            </section>
         </WebsiteLayout>
     }
 }
