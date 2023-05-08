@@ -1,168 +1,148 @@
 use yew::prelude::{function_component, html, Html};
 use yewdux::prelude::*;
 
-use crate::{layout::dashboard::DashboardLayout, pages::auth::AuthProtected, State};
+use crate::{pages::auth::AuthProtected, State};
 
 #[function_component]
 pub fn Dashboard() -> Html {
     let state = use_store_value::<State>();
 
     html! {
-      <AuthProtected is_authorized={state.is_user_authorized}>
-        <DashboardLayout>
-        <div class="drawer drawer-mobile">
-          <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-          <div class="drawer-content flex flex-col items-center justify-center">
-            <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">{"Open drawer"}</label>
-            // page content
-            <div class="p-6 bg-gray-100">
-            <div class="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mx-auto">
-              <div class="bg-white p-4 rounded-lg shadow-md">
-                <div class="flex items-center">
-                  <div class="icon bg-blue-500 text-white p-4 rounded-full mr-4">
-                    <i class="fas fa-users"></i>
-                  </div>
-                  <div>
-                    <p class="text-lg text-gray-700 font-medium">{"Users"}</p>
-                    <p class="text-gray-500">{"50"}</p>
-                  </div>
-                </div>
-              </div>
-              <div class="bg-white p-4 rounded-lg shadow-md">
-                <div class="flex items-center">
-                  <div class="icon bg-yellow-500 text-white p-4 rounded-full mr-4">
-                    <i class="fas fa-envelope"></i>
-                  </div>
-                  <div>
-                    <p class="text-lg text-gray-700 font-medium">{"Messages"}</p>
-                    <p class="text-gray-500">{"50"}</p>
-                  </div>
-                </div>
-              </div>
-              <div class="bg-white p-4 rounded-lg shadow-md">
-                <div class="flex items-center">
-                  <div class="icon bg-green-500 text-white p-4 rounded-full mr-4">
-                    <i class="fas fa-chart-line"></i>
-                  </div>
-                  <div>
-                    <p class="text-lg text-gray-700 font-medium">{"Analytics"}</p>
-                    <p class="text-gray-500">{"50"}</p>
-                  </div>
-                </div>
-              </div>
-              <div class="bg-white p-4 rounded-lg shadow-md">
-                <div class="flex items-center">
-                  <div class="icon bg-red-500 text-white p-4 rounded-full mr-4">
-                    <i class="fas fa-money-bill"></i>
-                  </div>
-                  <div>
-                    <p class="text-lg text-gray-700 font-medium">{"Revenue"}</p>
-                    <p class="text-gray-500">{"$50,000"}</p>
-                  </div>
-                </div>
-              </div>
-              <div class="bg-white p-4 rounded-lg shadow-md">
-                <div class="flex items-center">
-                  <div class="icon bg-purple-500 text-white p-4 rounded-full mr-4">
-                    <i class="fas fa-briefcase"></i>
-                  </div>
-                  <div>
-                    <p class="text-lg text-gray-700 font-medium">{"Jobs"}</p>
-                    <p class="text-gray-500">{"50"}</p>
-                  </div>
-                </div>
-              </div>
-              <div class="bg-white p-4 rounded-lg shadow-md">
-                <div class="flex items-center">
-                  <div class="icon bg-purple-500 text-white p-4 rounded-full mr-4">
-                    <i class="fas fa-briefcase"></i>
-                  </div>
-                  <div>
-                    <p class="text-lg text-gray-700 font-medium">{"Jobs"}</p>
-                    <p class="text-gray-500">{"50"}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            </div>
+      <AuthProtected is_authorized={!state.is_user_authorized}>
+      <main>
+        <div class="flex flex-col md:flex-row">
+            <nav aria-label="alternative nav">
+                <div class="bg-gray-800 shadow-xl h-20 fixed bottom-0 mt-12 md:relative md:h-screen z-10 w-full md:w-48 content-center">
 
-            <div class="p-6 bg-gray-100">
-            <div class="container mx-auto">
-                <div class="w-full overflow-hidden rounded-lg shadow-xs">
-                <div class="w-full overflow-x-auto">
-                    <table class="w-full whitespace-no-wrap">
-                    <thead>
-                        <tr
-                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
-                        >
-                        <th class="px-4 py-3">{"Product Name"}</th>
-                        <th class="px-4 py-3">{"SKU"}</th>
-                        <th class="px-4 py-3">{"Price"}</th>
-                        <th class="px-4 py-3">{"Quantity"}</th>
-                        </tr>
-                    </thead>
-                    <tbody
-                        class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
-                    >
-                        <tr class="text-gray-700 dark:text-gray-400">
-                        <td class="px-4 py-3">
-                            <div class="flex items-center text-sm">
-                            <div>
-                                <p class="font-semibold">{"Product A"}</p>
-                                <p class="text-xs text-gray-600 dark:text-gray-400">
-                                {"Description of Product A"}
-                                </p>
-                            </div>
-                            </div>
-                        </td>
-                        <td class="px-4 py-3">
-                            <p class="text-sm">{"ABC123"}</p>
-                        </td>
-                        <td class="px-4 py-3">
-                            <p class="text-sm">{"$100.00"}</p>
-                        </td>
-                        <td class="px-4 py-3">
-                            <p class="text-sm">{"50"}</p>
-                        </td>
-                        </tr>
-                        <tr class="text-gray-700 dark:text-gray-400">
-                        <td class="px-4 py-3">
-                            <div class="flex items-center text-sm">
-                            <div>
-                                <p class="font-semibold">{"Product B"}</p>
-                                <p class="text-xs text-gray-600 dark:text-gray-400">
-                                {"Description of Product B"}
-                                </p>
-                            </div>
-                            </div>
-                        </td>
-                        <td class="px-4 py-3">
-                            <p class="text-sm">{"DEF456"}</p>
-                        </td>
-                        <td class="px-4 py-3">
-                            <p class="text-sm">{"$200.00"}</p>
-                        </td>
-                        <td class="px-4 py-3">
-                            <p class="text-sm">{"25"}</p>
-                        </td>
-                        </tr>
-                    </tbody>
-                    </table>
+                    <div class="md:mt-12 md:w-48 md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between">
+                        <ul class="list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left">
+                            <li class="mr-3 flex-1">
+                                <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500">
+                                    <i class="fas fa-tasks pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">{"Tasks"}</span>
+                                </a>
+                            </li>
+                            <li class="mr-3 flex-1">
+                                <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
+                                    <i class="fa fa-envelope pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">{"Messages"}</span>
+                                </a>
+                            </li>
+                            <li class="mr-3 flex-1">
+                                <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
+                                    <i class="fas fa-chart-area pr-0 md:pr-3 text-blue-600"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">{"Analytics"}</span>
+                                </a>
+                            </li>
+                            <li class="mr-3 flex-1">
+                                <a href="#" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
+                                    <i class="fa fa-wallet pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">{"Payments"}</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                </div>
-            </div>
-            // page content
-          </div>
-          <div class="drawer-side">
-            <label for="my-drawer-2" class="drawer-overlay"></label>
-            <ul class="menu p-4 w-80 bg-base-100 text-base-content">
-              <li><a>{"Sidebar Item 1"}</a></li>
-              <li><a>{"Sidebar Item 2"}</a></li>
-            </ul>
-          </div>
+            </nav>
+            <section>
+                <div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5">
+                    <div class="bg-gray-800 pt-3">
+                        <div class="rounded-tl-3xl bg-gradient-to-r from-blue-900 to-gray-800 p-4 shadow text-2xl text-white">
+                            <h1 class="font-bold pl-2">{"Analytics"}</h1>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap">
+                        <div class="w-full md:w-1/2 xl:w-1/3 p-6">
+                            <div class="bg-gradient-to-b from-green-200 to-green-100 border-b-4 border-green-600 rounded-lg shadow-xl p-5">
+                                <div class="flex flex-row items-center">
+                                    <div class="flex-shrink pr-4">
+                                        <div class="rounded-full p-5 bg-green-600"><i class="fa fa-wallet fa-2x fa-inverse"></i></div>
+                                    </div>
+                                    <div class="flex-1 text-right md:text-center">
+                                        <h2 class="font-bold uppercase text-gray-600">{"Total Revenue"}</h2>
+                                      <p class="font-bold text-3xl">{"$3249"} <span class="text-green-500"><i class="fas fa-caret-up"></i></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 xl:w-1/3 p-6">
+                            <div class="bg-gradient-to-b from-pink-200 to-pink-100 border-b-4 border-pink-500 rounded-lg shadow-xl p-5">
+                                <div class="flex flex-row items-center">
+                                    <div class="flex-shrink pr-4">
+                                        <div class="rounded-full p-5 bg-pink-600"><i class="fas fa-users fa-2x fa-inverse"></i></div>
+                                    </div>
+                                    <div class="flex-1 text-right md:text-center">
+                                        <h2 class="font-bold uppercase text-gray-600">{"Total Users"}</h2>
+                                        <p class="font-bold text-3xl">{"249 "}<span class="text-pink-500"><i class="fas fa-exchange-alt"></i></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 xl:w-1/3 p-6">
+                            <div class="bg-gradient-to-b from-yellow-200 to-yellow-100 border-b-4 border-yellow-600 rounded-lg shadow-xl p-5">
+                                <div class="flex flex-row items-center">
+                                    <div class="flex-shrink pr-4">
+                                        <div class="rounded-full p-5 bg-yellow-600"><i class="fas fa-user-plus fa-2x fa-inverse"></i></div>
+                                    </div>
+                                    <div class="flex-1 text-right md:text-center">
+                                        <h2 class="font-bold uppercase text-gray-600">{"New Users"}</h2>
+                                        <p class="font-bold text-3xl">{"2"} <span class="text-yellow-600"><i class="fas fa-caret-up"></i></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 xl:w-1/3 p-6">
+                            <div class="bg-gradient-to-b from-blue-200 to-blue-100 border-b-4 border-blue-500 rounded-lg shadow-xl p-5">
+                                <div class="flex flex-row items-center">
+                                    <div class="flex-shrink pr-4">
+                                        <div class="rounded-full p-5 bg-blue-600"><i class="fas fa-server fa-2x fa-inverse"></i></div>
+                                    </div>
+                                    <div class="flex-1 text-right md:text-center">
+                                        <h2 class="font-bold uppercase text-gray-600">{"Server Uptime"}</h2>
+                                        <p class="font-bold text-3xl">{""}</p>
+                                    </div>{"152 days"}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 xl:w-1/3 p-6">
+                            <div class="bg-gradient-to-b from-indigo-200 to-indigo-100 border-b-4 border-indigo-500 rounded-lg shadow-xl p-5">
+                                <div class="flex flex-row items-center">
+                                    <div class="flex-shrink pr-4">
+                                        <div class="rounded-full p-5 bg-indigo-600"><i class="fas fa-tasks fa-2x fa-inverse"></i></div>
+                                    </div>
+                                    <div class="flex-1 text-right md:text-center">
+                                        <h2 class="font-bold uppercase text-gray-600">{"To Do List"}</h2>
+                                        <p class="font-bold text-3xl">{"7 tasks"}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 xl:w-1/3 p-6">
+                            <div class="bg-gradient-to-b from-red-200 to-red-100 border-b-4 border-red-500 rounded-lg shadow-xl p-5">
+                                <div class="flex flex-row items-center">
+                                    <div class="flex-shrink pr-4">
+                                        <div class="rounded-full p-5 bg-red-600"><i class="fas fa-inbox fa-2x fa-inverse"></i></div>
+                                    </div>
+                                    <div class="flex-1 text-right md:text-center">
+                                        <h2 class="font-bold uppercase text-gray-600">{"Issues"}</h2>
+                                        <p class="font-bold text-3xl">{"3"} <span class="text-red-500"><i class="fas fa-caret-up"></i></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="w-full md:w-1/2 xl:w-1/3 p-6">
+                        <div class="bg-white border-transparent rounded-lg shadow-xl">
+                            <div class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                                <h2 class="font-bold uppercase text-gray-600">{"Advert"}</h2>
+                            </div>
+                            <div class="p-5 text-center">
+                                <script type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7D52JJ&placement=wwwtailwindtoolboxcom" id="_carbonads_js"></script>
+                            </div>
+                        </div>
+                    </div>
+            </section>
         </div>
-        </DashboardLayout>
+      </main>
       </AuthProtected>
     }
 }

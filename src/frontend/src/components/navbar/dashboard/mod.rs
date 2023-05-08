@@ -1,44 +1,57 @@
-use crate::components::sidebar::Sidebar;
 use crate::State;
 use yew::prelude::{function_component, html, Html};
 use yewdux::prelude::*;
 
 #[function_component]
 pub fn Navbar() -> Html {
-    let (_state, dispatch) = use_store::<State>();
-
-    let toggle_theme =
-        dispatch.reduce_mut_callback(|state| state.is_dark_theme = !state.is_dark_theme);
-
-    let onclick = dispatch.reduce_mut_callback(|state| state.menu_state = !state.menu_state);
-
     html! {
-        <div>
-            <div class="navbar bg-base-100 border-1 border-gray-600">
-                <div class="navbar-start">
-                    <div class="dropdown">
-                        <label tabindex="0" class="btn btn-ghost btn-circle" {onclick}>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
-                        </label>
+        <header>
+            <nav aria-label="menu nav" class="bg-gray-800 pt-2 md:pt-1 pb-1 px-1 mt-0 h-auto fixed w-full z-20 top-0">
+
+                <div class="flex flex-wrap items-center">
+                    <div class="flex flex-shrink md:w-1/3 justify-center md:justify-start text-white">
+                        <a href="#" aria-label="Home">
+                            <span class="text-xl pl-2"><i class="em em-grinning"></i></span>
+                        </a>
+                    </div>
+
+                    <div class="flex flex-1 md:w-1/3 justify-center md:justify-start text-white px-2">
+                        <span class="relative w-full">
+                            <input aria-label="search" type="search" id="search" placeholder="Search" class="w-full bg-gray-900 text-white transition border border-transparent focus:outline-none focus:border-gray-400 rounded py-3 px-2 pl-10 appearance-none leading-normal" />
+                            <div class="absolute search-icon" style="top: 1rem; left: .8rem;">
+                                <svg class="fill-current pointer-events-none text-white w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
+                                </svg>
+                            </div>
+                        </span>
+                    </div>
+
+                    <div class="flex w-full pt-2 content-center justify-between md:w-1/3 md:justify-end">
+                        <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
+                            <li class="flex-1 md:flex-none md:mr-3">
+                                <a class="inline-block py-2 px-4 text-white no-underline" href="#">{"Active"}</a>
+                            </li>
+                            <li class="flex-1 md:flex-none md:mr-3">
+                                <a class="inline-block text-gray-400 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">{"link"}</a>
+                            </li>
+                            <li class="flex-1 md:flex-none md:mr-3">
+                                <div class="relative inline-block">
+                                    <button class="drop-button text-white py-2 px-2"> <span class="pr-2"><i class="em em-robot_face"></i></span> {"Hi, User "}<svg class="h-3 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg></button>
+                                    <div id="myDropdown" class="dropdownlist absolute bg-gray-800 text-white right-0 mt-3 p-3 overflow-auto z-30 invisible">
+                                        <input type="text" class="drop-search p-2 text-gray-600" placeholder="Search.." id="myInput" />
+                                        <a href="#" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fa fa-user fa-fw"></i> {"Profile"}</a>
+                                        <a href="#" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fa fa-cog fa-fw"></i> {"Settings"}</a>
+                                        <div class="border border-gray-800"></div>
+                                        <a href="#" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fas fa-sign-out-alt fa-fw"></i>{" Log Out"}</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="navbar-center">
-                    <a class="btn btn-ghost normal-case text-xl">{"Inventree"}</a>
-                </div>
-                <div class="navbar-end">
-                <input type="checkbox" class="toggle" onchange={toggle_theme} />
-                    <button class="btn btn-ghost btn-circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                    </button>
-                    <button class="btn btn-ghost btn-circle">
-                    <div class="indicator">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                        <span class="badge badge-xs badge-primary indicator-item"></span>
-                    </div>
-                    </button>
-                </div>
-            </div>
-            <Sidebar/>
-        </div>
+
+            </nav>
+        </header>
     }
 }
