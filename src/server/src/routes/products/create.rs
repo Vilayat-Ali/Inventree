@@ -1,6 +1,5 @@
-pub use actix_web::{post, HttpResponse, Responder};
+pub use actix_web::{HttpResponse, Responder};
 
-#[post("/create")]
 pub async fn create_product() -> impl Responder {
     HttpResponse::Ok().json(common::Response::<String>::new(
         200,
