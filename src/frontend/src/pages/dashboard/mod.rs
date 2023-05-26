@@ -25,7 +25,7 @@ pub fn Dashboard() -> Html {
     ];
 
     html! {
-      <AuthProtected is_authorized={!state.is_user_authorized}>
+      <AuthProtected is_authorized={state.is_user_authorized}>
       <body class="bg-gray-800 font-sans leading-normal tracking-normal mt-12">
       <header>
           <nav aria-label="menu nav" class="bg-gray-800 pt-2 md:pt-1 pb-1 px-1 mt-0 h-auto fixed w-full z-20 top-0">

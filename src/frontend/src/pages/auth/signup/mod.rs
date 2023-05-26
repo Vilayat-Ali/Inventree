@@ -1,83 +1,87 @@
+use gloo_console::log;
+use wasm_bindgen::{JsCast, UnwrapThrowExt};
+use web_sys::{HtmlInputElement, InputEvent};
 use yew::{
+    html::onchange::Event,
     prelude::{function_component, html, Html},
     use_state, Callback,
 };
 
 use crate::layout::website::WebsiteLayout;
 
-struct SignupDetails {
-    email: Option<String>,
-    password: Option<String>,
-}
-
-impl SignupDetails {
-    fn new() -> Self {
-        Self {
-            email: None,
-            password: None,
-        }
-    }
-}
-
 #[function_component]
 pub fn Signup() -> Html {
-    // state
     let email = use_state(|| String::new());
     let password = use_state(|| String::new());
 
-    let handle_email = Callback::from(move |_| {
+    let oninput_email = Callback::from({
         let email = email.clone();
-        email.set(String::from("New"))
+        move |input_event: InputEvent| {
+            let target: HtmlInputElement = input_event.target().unwrap().dyn_into().unwrap();
+            email.set(target.value());
+        }
     });
 
-    let handle_password = Callback::from(move |_| {
+    let oninput_password = Callback::from({
         let password = password.clone();
-        password.set(String::from("Newly"))
+        move |input_event: InputEvent| {
+            let target: HtmlInputElement = input_event.target().unwrap().dyn_into().unwrap();
+            password.set(target.value());
+        }
+    });
+
+    let handle_submit = Callback::from(move |_| {
+        log!(format!("{}, {}", &*email.clone(), &*password.clone()));
     });
 
     html! {
         <WebsiteLayout>
-            <div class="body-bg min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0" style="font-family:'Lato',sans-serif;">
-            <header class="max-w-lg mx-auto">
-                <a href="#">
-                    <h1 class="text-4xl font-bold text-white text-center">{"Startup"}</h1>
-                </a>
-            </header>
-
-            <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
-                <section>
-                    <h3 class="font-bold text-2xl">{"Welcome to Startup"}</h3>
-                    <p class="text-gray-600 pt-2">{"Sign in to your account."}</p>
-                </section>
-
-                <section class="mt-10">
-                    <form class="flex flex-col" method="POST" action="#">
-                        <div class="mb-6 pt-3 rounded bg-gray-200">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="email">{"Email"}</label>
-                            <input type="text" id="email" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" onchange={handle_email} />
-                        </div>
-                        <div class="mb-6 pt-3 rounded bg-gray-200">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="password">{"Password"}</label>
-                            <input type="password" id="password" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" onchange={handle_password} />
-                        </div>
-                        <div class="flex justify-end">
-                            <a href="#" class="text-sm text-purple-600 hover:text-purple-700 hover:underline mb-6">{"Forgot your password?"}</a>
-                        </div>
-                        <button class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">{"Sign In"}</button>
+            <div class="flex flex-col items-center justify-center h-screen">
+                <div class="bg-white text-gray-800 dark:text-white dark:bg-gray-700 p-10 rounded-lg shadow-lg">
+                    <h1 class="text-2xl font-semibold mb-6">{"Signup"}</h1>
+                    <form>
+                    <div class="mb-4">
+                        <label
+                        class="block text-gray-800 dark:text-white font-bold mb-2"
+                        for="Email"
+                        >
+                        {"Email"}
+                        </label>
+                        <input
+                        oninput={oninput_email}
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline"
+                        id="Email"
+                        type="text"
+                        placeholder="Email"
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <label
+                        class="block text-white dark:text-gray font-bold mb-2"
+                        for="password"
+                        >
+                        {"Password"}
+                        </label>
+                        <input
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                        id="password"
+                        type="password"
+                        placeholder="Password"
+                        oninput={oninput_password}
+                        />
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="button"
+                        onclick={handle_submit}
+                        >
+                        {"Signup"}
+                        </button>
+                    </div>
                     </form>
-                </section>
-            </main>
-
-            <div class="max-w-lg mx-auto text-center mt-12 mb-6">
-                <p class="text-white">{"Don't have an account? "}<a href="#" class="font-bold hover:underline">{"Sign up"}</a>{"."}</p>
+                </div>
             </div>
-
-            <footer class="max-w-lg mx-auto flex justify-center text-white">
-                <a href="#" class="hover:underline">{"Contact"}</a>
-                <span class="mx-3">{"•"}</span>
-                <a href="#" class="hover:underline">{"Privacy"}</a>
-            </footer>
-        </div>
         </WebsiteLayout>
     }
 }
