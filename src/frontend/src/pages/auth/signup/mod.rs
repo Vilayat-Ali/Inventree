@@ -10,6 +10,7 @@ use crate::layout::website::WebsiteLayout;
 
 #[function_component]
 pub fn Signup() -> Html {
+    let username = use_state(|| String::new());
     let email = use_state(|| String::new());
     let password = use_state(|| String::new());
 
