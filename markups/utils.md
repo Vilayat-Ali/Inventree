@@ -28,18 +28,6 @@ use my_cool_app::auth;
 
 The security module contains Rust code to handle environment and security management at the application level. This module provides functions to handle things like generating secure random passwords, encrypting and decrypting data, and managing environment variables.
 
-To use the security module in your Rust project, add the following line to your Cargo.toml file:
-
-```
-[dependencies]
-rand = "0.8.4"
-```
-
-You can then import the security module in your Rust code using:
-
-```
-use my_cool_app::security;
-```
 
 ## Cargo Workspace
 
@@ -49,11 +37,7 @@ To use this Rust library in your project, simply add the following to your Cargo
 
 ```
 [dependencies]
-my_cool_app = { git = "https://github.com/myusername/my_cool_app.git", branch = "main" }
+auth = { path = "../auth" }
 ```
 
 You can then import the auth and security modules in your Rust code as shown above.
-
-## Conclusion
-
-That's it! With this Rust library, you can easily handle authentication and security management in your application. Happy coding!
